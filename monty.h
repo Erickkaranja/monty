@@ -6,6 +6,7 @@
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
+#include<ctype.h>
 
 #define DELIMS "\n \t\r"
 

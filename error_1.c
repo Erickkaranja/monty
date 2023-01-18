@@ -51,7 +51,7 @@ int malloc_error(void)
 }
 
 /**
- * _error - wrapper around error, handling monty specific errors
+ * _strtol - wrapper around error, handling monty specific errors
  * @num_string: string that *should* represent an integer
  * @line_number: line counter of monty file
  * Return: long int that error converted
