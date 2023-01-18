@@ -23,7 +23,7 @@ void push(stack_t **stack, unsigned int line_number)
 		printf("L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	num = _error(op, line_number);
+	num = _strtol(op, line_number);
 	element->n = num;
 	element->prev = NULL;
 	element->next = *stack;
