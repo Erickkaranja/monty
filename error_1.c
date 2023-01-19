@@ -67,7 +67,7 @@ int no_int_error(unsigned int line_number)
  * @num_string: string that *should* represent an integer
  * @line_number: line counter of monty file
  * Return: long int that error converted
-**/
+*/
 
 int _strtol(char *num_string, unsigned int line_number)
 {
@@ -106,3 +106,4 @@ int _strtol(char *num_string, unsigned int line_number)
 		}
 	return (val);
 }
+

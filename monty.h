@@ -3,14 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <limits.h>
-#include<ctype.h>
+#include <unistd.h>
 
 #define STACK 0
 #define QUEUE 1
-#define DELIMS "\n \t\r"
+#define DELIMS " \n\t\a\b"
 
 #define UNUSED(x) (void)(x)
 
@@ -33,15 +30,6 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-/** PRIMARY INTERPRETOR FUNCTIONS**/
-void free_stack(stack_t **stack);
-int init_stack(stack_t **stack);
-int check_mode(stack_t *stack);
-void free_tokens(void);
-unsigned int token_arr_len(void);
-int run_monty(FILE *script_fd);
-void set_op_tok_error(int error_code);
-
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -56,6 +44,16 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/** PRIMARY INTERPRETOR FUNCTIONS**/
+void free_stack(stack_t **stack);
+int init_stack(stack_t **stack);
+int check_mode(stack_t *stack);
+void free_tokens(void);
+unsigned int token_arr_len(void);
+int run_monty(FILE *script_fd);
+void set_op_tok_error(int error_code);
+
 
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
@@ -87,7 +85,6 @@ int f_open_error(char *filename);
 int unknown_op_error(char *opcode, unsigned int line_number);
 int no_int_error(unsigned int line_number);
  
-
-
-int _strtol(char *num_string, unsigned int line_number);
+char **strtow(char *str, char *delims);
+char *get_int(int n);
 #endif
