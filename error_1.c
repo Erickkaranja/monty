@@ -51,11 +51,23 @@ int malloc_error(void)
 }
 
 /**
+ * no_int_error - Prints invalid monty_push argument error messages.
+ * @line_number: Line number in Monty bytecodes file where error occurred.
+ *
+ * Return: (EXIT_FAILURE) always.
+ */
+int no_int_error(unsigned int line_number)
+{
+	fprintf(stderr, "L%u: usage: push integer\n", line_number);
+	return (EXIT_FAILURE);
+}
+
+/**
  * _strtol - wrapper around error, handling monty specific errors
  * @num_string: string that *should* represent an integer
  * @line_number: line counter of monty file
  * Return: long int that error converted
- **/
+**/
 
 int _strtol(char *num_string, unsigned int line_number)
 {
