@@ -74,3 +74,41 @@ void swap(stack_t **stack, unsigned int line_number)
 	tmp->next = *stack;
 	(*stack) = (*stack)->prev;
 }
+
+/**
+* pall - prints all the values on the stack,
+*       starting from the top of the stack.
+* @stack: Double pointer to the first node.
+* @line_number: Value of new node.
+*/
+
+
+void pall(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		return;
+	}
+	while (*stack)
+	{
+		printf("%d\n", (*stack)->n);
+		(*stack)->next;
+	}
+}
+/**
+*pop - removes the top element of the stack.
+*@stack: Double pointer to the stack.
+*@line_number: Value of the new node.
+*/
+void pop(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		printf("L<%d>: can't pop an empty stack", line_number);
+	}
+	int poped_data;
+	stack_t *temp = *stack;
+	*stack = (*stack)->next;
+	poped_data = temp->n;
+	free(temp);
+}
