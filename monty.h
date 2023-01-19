@@ -33,7 +33,7 @@ typedef struct stack_s
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
+ * for ck, queues, LIFO, FIFO
  */
 typedef struct instruction_s
 {
@@ -47,14 +47,11 @@ void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 
-<<<<<<< HEAD
 void monty_add(stack_t **stack, unsigned int line_number);
 void monty_sub(stack_t **stack, unsigned int line_number);
 void monty_mul(stack_t **stack, unsigned int line_number);
 void monty_div(stack_t **stack, unsigned int line_number);
 void monty_mod(stack_t **stack, unsigned int line_number);
 
-=======
 int _strtol(char *num_string, unsigned int line_number);
->>>>>>> 6d59ced4a2472157e9203dd85c5dc7ff4466fa40
 #endif
