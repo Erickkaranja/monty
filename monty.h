@@ -11,7 +11,17 @@
 #define STACK 0
 #define QUEUE 1
 #define DELIMS "\n \t\r"
+
 #define UNUSED(x) (void)(x)
+
+extern char **op_toks;
+
+int short_stack_error(unsigned int line_number, char *op);
+int pop_error(unsigned int line_number);
+int pint_error(unsigned int line_number);
+int div_error(unsigned int line_number);
+int pchar_error(unsigned int line_number, char *message); 
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -22,12 +32,22 @@
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO
  */
+
 typedef struct stack_s
 {
 	int n;
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
+
+/** PRIMARY INTERPRETOR FUNCTIONS**/
+void free_stack(stack_t **stack);
+int init_stack(stack_t **stack);
+int check_mode(stack_t *stack);
+void free_tokens(void);
+unsigned int token_arr_len(void);
+int run_monty(FILE *script_fd);
+void set_op_tok_error(int error_code);
 
 /**
  * struct instruction_s - opcode and its function
@@ -37,6 +57,7 @@ typedef struct stack_s
  * Description: opcode and its function
  * for ck, queues, LIFO, FIFO
  */
+
 typedef struct instruction_s
 {
 	char *opcode;

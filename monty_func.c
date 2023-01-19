@@ -40,14 +40,15 @@ void push(stack_t **stack, unsigned int line_number)
 
 void pint(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL)
+	if ((*stack)->next == NULL)
 	{
-	printf("L<%d>: can't pint, stack empty", line_number);
-
-	while (*stack)
-	printf("%d", (*stack)->n);
+		set_op_tok_error(pint_error(line_number));
+		return;
 	}
+
+	printf("%d\n", (*stack)->next->n);
 }
+
 
 /**
 * swap - swaps the top two elements of the stack.
@@ -61,8 +62,8 @@ void swap(stack_t **stack, unsigned int line_number)
 	UNUSED(line_number);
 	if (!(*stack) || !((*stack)->next))
 	{
-		printf("L%u: can't swap, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		set_op_tok_error(short_stack_error(line_number, "swap"));
+		return;
 	}
 	tmp = (*stack)->next;
 	(*stack)->prev = (*stack)->next;
@@ -85,15 +86,14 @@ void swap(stack_t **stack, unsigned int line_number)
 
 void pall(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL)
+	stack_t *tmp = (*stack)->next;
+
+	while (tmp)
 	{
-		return;
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
 	}
-	while (*stack)
-	{
-		printf("%d\n", (*stack)->n);
-		(*stack)->next;
-	}
+	(void)line_number;
 }
 /**
 *pop - removes the top element of the stack.
@@ -102,13 +102,19 @@ void pall(stack_t **stack, unsigned int line_number)
 */
 void pop(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL)
 	{
-		printf("L<%d>: can't pop an empty stack", line_number);
+	stack_t *next = NULL;
+
+	if ((*stack)->next == NULL)
+	{
+		set_op_tok_error(pop_error(line_number));
+		return;
 	}
-	int poped_data;
-	stack_t *temp = *stack;
-	*stack = (*stack)->next;
-	poped_data = temp->n;
-	free(temp);
+
+	next = (*stack)->next->next;
+	free((*stack)->next);
+	if (next)
+		next->prev = *stack;
+	(*stack)->next = next;
+}
 }

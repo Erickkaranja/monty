@@ -11,8 +11,8 @@
 void monty_add(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
-	printf("L<%d>: can't add, stack too short\n", line_number);
-	return;
+	set_op_tok_error(short_stack_error(line_number, "add"));
+		return;
 	(*stack)->next->next->n += (*stack)->next->n;
 
 pop(stack, line_number); 
@@ -30,8 +30,8 @@ pop(stack, line_number);
 void monty_sub(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
-	printf("L<%d>: can't add, stack too short\n", line_number);
-         return;
+	set_op_tok_error(short_stack_error(line_number, "sub"));
+		return;
 	(*stack)->next->next->n -= (*stack)->next->n;
 
 pop(stack, line_number);
@@ -50,8 +50,8 @@ pop(stack, line_number);
 void monty_mul(stack_t **stack, unsigned int line_number)
 {
 if ((*stack)->next == NULL || (*stack)->next->next == NULL)
-	printf("L<%d>: can't add, stack too short\n", line_number);
-	return;
+	set_op_tok_error(short_stack_error(line_number, "mul"));
+		return;
 
 	(*stack)->next->next->n *= (*stack)->next->n;
 
@@ -69,12 +69,12 @@ pop(stack, line_number);
 void monty_div(stack_t **stack, unsigned int line_number)
 {
 if ((*stack)->next == NULL || (*stack)->next->next == NULL)
-	printf("L<%d>: can't add, stack too short\n", line_number);
-	return;
+	set_op_tok_error(short_stack_error(line_number, "div"));
+		return;
 
 	if ((*stack)->next->n == 0)
-	printf("L<%d>: division by zero\n", line_number);
-	return;
+	set_op_tok_error(div_error(line_number));
+		return;
 
 	(*stack)->next->next->n /= (*stack)->next->n;
 
@@ -84,20 +84,20 @@ pop(stack, line_number);
 *
 * mod - computes the rest of the division of the second top
 	element of the stack by the top element of the stack.
-*
+* @stack: pointer to the double linked list.
+* @line_number: line on monty byte file.
 */
 void monty_mod(stack_t **stack, unsigned int line_number)
 {
 if ((*stack)->next == NULL || (*stack)->next->next == NULL)
-	printf("L<%d>: can't add, stack too short\n", line_number);
-	return;
+	set_op_tok_error(short_stack_error(line_number, "mod"));
+		return;
 
 	if ((*stack)->next->n == 0)
-	printf("L<%d>: division by zero\n", line_number);
-	return;
+	set_op_tok_error(div_error(line_number));
+		return;
 
 	(*stack)->next->next->n %= (*stack)->next->n;
 
 pop(stack, line_number);
 }
-

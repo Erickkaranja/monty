@@ -54,12 +54,13 @@ void monty_pchar(stack_t **stack, unsigned int line_number)
 {
 if ((*stack)->next == NULL)
 	{
-		printf("L<%d>: can't pchar, stack empty", line_number);
+		set_op_tok_error(pchar_error(line_number, "stack empty"));
 		return;
 	}
 	if ((*stack)->next->n < 0 || (*stack)->next->n > 127)
 	{
-		printf("L<%d>: can't pchar, value out of range", line_number);
+		set_op_tok_error(pchar_error(line_number,
+					     "value out of range"));
 		return;
 	}
 
